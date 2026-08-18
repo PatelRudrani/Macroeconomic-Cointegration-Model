@@ -1,0 +1,122 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\R.Patel036\OneDrive - University of Massachusetts Boston\Desktop\project\aplied_project.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 7 Dec 2024, 18:58:04
+{txt}
+{com}. 
+. import excel using "Applied Econometrics (Final Data).xlsx", firstrow clear
+{res}{text}(6 vars, 392 obs)
+
+{com}. 
+. count
+  {res}392
+{txt}
+{com}. summarize
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 6}Period {c |}{res}        383    17560.68    3369.625      11746      23373
+{txt}{space 5}SPIndex {c |}{res}        383    1668.942    1081.305     403.69    4769.83
+{txt}{space 9}CPI {c |}{res}        383     208.515    43.63852      138.6    308.742
+{txt}GDPGrowthR~e {c |}{res}        383    .0021848    .0083927    -.09051    .054805
+{txt}Unemployment {c |}{res}        383    .0572977    .0179251       .034       .148
+{txt}{hline 13}{c +}{hline 57}
+{space 9}FDI {c |}{res}        383      210829    160744.9    -293968     956604
+{txt}
+{com}. browse
+{txt}
+{com}. 
+. summarize SPIndex GDPGrowthRate Unemployment FDI CPI
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 5}SPIndex {c |}{res}        383    1668.942    1081.305     403.69    4769.83
+{txt}GDPGrowthR~e {c |}{res}        383    .0021848    .0083927    -.09051    .054805
+{txt}Unemployment {c |}{res}        383    .0572977    .0179251       .034       .148
+{txt}{space 9}FDI {c |}{res}        383      210829    160744.9    -293968     956604
+{txt}{space 9}CPI {c |}{res}        383     208.515    43.63852      138.6    308.742
+{txt}
+{com}. regress SPIndex GDPGrowthRate CPI Unemployment FDI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       383
+{txt}{hline 13}{c +}{hline 34}   F(4, 378)       = {res}   606.47
+{txt}       Model {c |} {res}  386429205         4  96607301.2   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 60212878.7       378   159293.33   {txt}R-squared       ={res}    0.8652
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.8638
+{txt}       Total {c |} {res}  446642084       382  1169220.11   {txt}Root MSE        =   {res} 399.12
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      SPIndex{col 15}{c |} Coefficient{col 27}  Std. err.{col 39}      t{col 47}   P>|t|{col 55}     [95% con{col 68}f. interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+GDPGrowthRate {c |}{col 15}{res}{space 2}  5647.11{col 27}{space 2} 2440.301{col 38}{space 1}    2.31{col 47}{space 3}0.021{col 55}{space 4} 848.8449{col 68}{space 3} 10445.38
+{txt}{space 10}CPI {c |}{col 15}{res}{space 2} 21.91186{col 27}{space 2} .5336894{col 38}{space 1}   41.06{col 47}{space 3}0.000{col 55}{space 4} 20.86249{col 68}{space 3} 22.96123
+{txt}{space 1}Unemployment {c |}{col 15}{res}{space 2}-15225.64{col 27}{space 2} 1172.636{col 38}{space 1}  -12.98{col 47}{space 3}0.000{col 55}{space 4}-17531.34{col 68}{space 3}-12919.93
+{txt}{space 10}FDI {c |}{col 15}{res}{space 2}-.0002009{col 27}{space 2} .0001481{col 38}{space 1}   -1.36{col 47}{space 3}0.176{col 55}{space 4}-.0004922{col 68}{space 3} .0000903
+{txt}{space 8}_cons {c |}{col 15}{res}{space 2}-1997.596{col 27}{space 2} 126.2217{col 38}{space 1}  -15.83{col 47}{space 3}0.000{col 55}{space 4}-2245.781{col 68}{space 3}-1749.412
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. generate Log_SPIndex = log(SPIndex)
+{txt}(9 missing values generated)
+
+{com}. generate Log_GDP = log(GDPGrowthRate)
+{txt}(133 missing values generated)
+
+{com}. generate Log_CPI = log(CPI)
+{txt}(9 missing values generated)
+
+{com}. generate Log_FDI = log(FDI)
+{txt}(24 missing values generated)
+
+{com}. 
+. summarize  Log_SPIndex Log_GDP Unemployment Log_FDI Log_CPI
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 1}Log_SPIndex {c |}{res}        383     7.22771    .6239169   6.000647   8.470066
+{txt}{space 5}Log_GDP {c |}{res}        259   -5.603154    1.039156  -11.16227  -2.903974
+{txt}Unemployment {c |}{res}        383    .0572977    .0179251       .034       .148
+{txt}{space 5}Log_FDI {c |}{res}        368    11.97957    1.135488   3.332205   13.77114
+{txt}{space 5}Log_CPI {c |}{res}        383    5.318003     .210881   4.931592   5.732506
+{txt}
+{com}. regress  Log_SPIndex Log_GDP Unemployment Log_FDI Log_CPI
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       251
+{txt}{hline 13}{c +}{hline 34}   F(4, 246)       = {res}   717.93
+{txt}       Model {c |} {res} 94.0857739         4  23.5214435   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 8.05969946       246  .032763006   {txt}R-squared       ={res}    0.9211
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.9198
+{txt}       Total {c |} {res} 102.145473       250  .408581893   {txt}Root MSE        =   {res} .18101
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1} Log_SPIndex{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}Log_GDP {c |}{col 14}{res}{space 2} .0381461{col 26}{space 2} .0111316{col 37}{space 1}    3.43{col 46}{space 3}0.001{col 54}{space 4} .0162207{col 67}{space 3} .0600715
+{txt}Unemployment {c |}{col 14}{res}{space 2}-9.002192{col 26}{space 2} .6838379{col 37}{space 1}  -13.16{col 46}{space 3}0.000{col 54}{space 4}-10.34912{col 67}{space 3}-7.655268
+{txt}{space 5}Log_FDI {c |}{col 14}{res}{space 2} .0233848{col 26}{space 2} .0105274{col 37}{space 1}    2.22{col 46}{space 3}0.027{col 54}{space 4} .0026494{col 67}{space 3} .0441201
+{txt}{space 5}Log_CPI {c |}{col 14}{res}{space 2} 2.607968{col 26}{space 2} .0604615{col 37}{space 1}   43.13{col 46}{space 3}0.000{col 54}{space 4} 2.488879{col 67}{space 3} 2.727056
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-6.175962{col 26}{space 2}  .295654{col 37}{space 1}  -20.89{col 46}{space 3}0.000{col 54}{space 4}-6.758298{col 67}{space 3}-5.593626
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. save "applied_dataset (final).dta", replace
+{txt}{p 0 4 2}
+file {bf}
+applied_dataset (final).dta{rm}
+saved
+{p_end}
+
+{com}. export excel using "applied_dataset (final).xlsx", firstrow(variables) replace
+{res}{txt}file {bf:applied_dataset (final).xlsx} saved
+
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\R.Patel036\OneDrive - University of Massachusetts Boston\Desktop\project\aplied_project.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 7 Dec 2024, 18:58:08
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

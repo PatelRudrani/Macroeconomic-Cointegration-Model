@@ -1,0 +1,108 @@
+--------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\LabUser\Downloads\project\project\Aplied_Project_text_file
+> .log
+  log type:  text
+ opened on:  12 Dec 2024, 14:12:46
+
+. 
+. import excel using "MBA_AF_636_Applied_Econometric_Analysis.xlsx", firstrow cl
+> ear
+(6 vars, 407 obs)
+
+. 
+. count
+  407
+
+. browse
+
+. 
+. summarize SPIndex GDPGrowthRate CPI Unemployment FDI
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     SPIndex |        407    1591.781    1093.347        304    4769.83
+GDPGrowthR~e |        407    .0239828    .0178674      -.026       .061
+         CPI |        407    204.1129    45.85151        128    308.742
+Unemployment |        407    .0577157     .017355       .035        .13
+         FDI |        407    5947.786    119945.1    -345435     177277
+
+. regress SPIndex GDPGrowthRate CPI Unemployment FDI, level(99)
+
+      Source |       SS           df       MS      Number of obs   =       407
+-------------+----------------------------------   F(4, 402)       =    642.19
+       Model |   419660009         4   104915002   Prob > F        =    0.0000
+    Residual |  65675175.7       402  163371.084   R-squared       =    0.8647
+-------------+----------------------------------   Adj R-squared   =    0.8633
+       Total |   485335184       406  1195406.86   Root MSE        =    404.19
+
+-------------------------------------------------------------------------------
+      SPIndex | Coefficient  Std. err.      t    P>|t|     [99% conf. interval]
+--------------+----------------------------------------------------------------
+GDPGrowthRate |  -2661.375   1366.276    -1.95   0.052    -6197.454    874.7043
+          CPI |   20.65703   .4489608    46.01   0.000     19.49507    21.81899
+ Unemployment |  -13620.44   1433.525    -9.50   0.000    -17330.57   -9910.314
+          FDI |  -.0006291   .0001866    -3.37   0.001     -.001112   -.0001461
+        _cons |  -1770.903   150.8661   -11.74   0.000    -2161.361   -1380.444
+-------------------------------------------------------------------------------
+
+. 
+. generate Log_SPIndex = log(SPIndex)
+
+. generate Log_GDP = log(GDPGrowthRate)
+(46 missing values generated)
+
+. generate Log_CPI = log(CPI)
+
+. generate Log_FDI = log(FDI)
+(166 missing values generated)
+
+. 
+. summarize Log_GDP Log_SPIndex Unemployment Log_CPI Log_FDI 
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     Log_GDP |        361    -3.70181    .7071775  -6.907755  -2.796881
+ Log_SPIndex |        407    7.148445    .6835409   5.717028   8.470066
+Unemployment |        407    .0577157     .017355       .035        .13
+     Log_CPI |        407    5.293149    .2275028    4.85203   5.732506
+     Log_FDI |        241    10.86697    1.149363   7.820439   12.08547
+
+. regress Log_GDP Log_SPIndex Unemployment Log_FDI, level(99)
+
+      Source |       SS           df       MS      Number of obs   =       205
+-------------+----------------------------------   F(3, 201)       =     76.86
+       Model |  72.0593488         3  24.0197829   Prob > F        =    0.0000
+    Residual |  62.8152249       201  .312513557   R-squared       =    0.5343
+-------------+----------------------------------   Adj R-squared   =    0.5273
+       Total |  134.874574       204  .661149871   Root MSE        =    .55903
+
+------------------------------------------------------------------------------
+     Log_GDP | Coefficient  Std. err.      t    P>|t|     [99% conf. interval]
+-------------+----------------------------------------------------------------
+ Log_SPIndex |  -.5356425   .0714987    -7.49   0.000    -.7215757   -.3497092
+Unemployment |  -29.54559   2.701598   -10.94   0.000    -36.57112   -22.52005
+     Log_FDI |   .4052909   .0356076    11.38   0.000      .312693    .4978888
+       _cons |  -2.636321   .6011101    -4.39   0.000    -4.199514   -1.073128
+------------------------------------------------------------------------------
+
+. 
+. graph box Log_SPIndex Log_GDP Unemployment Log_FDI, yscale(range(-5 15)) ylabe
+> l(-5 (1) 15)
+
+. 
+. save MBA_AF_636_Applied_Dataset.dta, replace
+file MBA_AF_636_Applied_Dataset.dta saved
+
+. export excel using "MBA_AF_636_Applied_Dataset.xlsx", firstrow(variables) repl
+> ace
+file MBA_AF_636_Applied_Dataset.xlsx saved
+
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\Users\LabUser\Downloads\project\project\Aplied_Project_text_file
+> .log
+  log type:  text
+ closed on:  12 Dec 2024, 14:12:55
+--------------------------------------------------------------------------------

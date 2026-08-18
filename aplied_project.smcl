@@ -1,0 +1,39 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\R.Patel036\OneDrive - University of Massachusetts Boston\Desktop\project\aplied_project.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}11 Dec 2025, 13:40:26
+{txt}
+{com}. 
+. import excel using "Historical Data.xlsx", firstrow clear
+{res}{text}(6 vars, 180 obs)
+
+{com}. 
+. count
+  {res}180
+{txt}
+{com}. summarize
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 8}Date {c |}{res}          0
+{txt}{space 1}SP500_Close {c |}{res}        180     2736.68     1273.22     1030.7    6032.38
+{txt}SP500_Return {c |}{res}        179    1.042458     4.20313     -12.51      12.68
+{txt}{space 3}Inflation {c |}{res}        180      80.015     8.96247       68.4        100
+{txt}InterestRate {c |}{res}        180    1.229278    1.717344        .05       5.33
+{txt}{hline 13}{c +}{hline 57}
+{space 2}GDP_Growth {c |}{res}        180    2.591667    6.092397        -28       34.9
+{txt}
+{com}. browse
+{txt}
+{com}. 
+. summarize SPIndex GDPGrowthRate Unemployment FDI CPI
+{err}variable {bf}SPIndex{sf} not found
+{txt}{search r(111), local:r(111);}
+
+end of do-file
+
+{search r(111), local:r(111);}
+
+{com}. exit, clear
