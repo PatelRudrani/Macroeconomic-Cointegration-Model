@@ -15,4 +15,4 @@ The model regresses the log-transformed S&P 500 Index against the log-transforme
 ## Limitations
 The analysis acknowledges potential omitted variable bias, as factors such as investor sentiment, corporate governance quality, and index methodology changes were not included in the model and could affect the accuracy of the estimated relationships.
 
-[View Full Report]()
+[View Full Report](https://github.com/PatelRudrani/Macroeconomic-Cointegration-Model/blob/8b3994b86bb198a869dd4deb99e8ef1cc8f70a98/S%26P%20500%20Project.pdf)
